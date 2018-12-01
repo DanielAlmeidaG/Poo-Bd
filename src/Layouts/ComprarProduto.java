@@ -5,7 +5,7 @@
  */
 package Layouts;
 
-import Controllers.db_connection.ClientController.ClientController;
+import Data.Controllers.ClientController;
 
 /**
  *

@@ -1,6 +1,6 @@
-package Controllers.db_connection.ClientController;
+package Data.Controllers;
 
-import Controllers.db_connection.db_controller;
+import Data.db_connection.db_controller;
 import Package.Helper;
 import java.sql.Connection;
 import java.sql.DriverManager;

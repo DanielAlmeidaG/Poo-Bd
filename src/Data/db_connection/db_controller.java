@@ -1,5 +1,6 @@
-package Controllers.db_connection;
+package Data.db_connection;
  
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,7 +13,9 @@ public class db_controller {
     final String _pathBD;
 
     public db_controller() {
-        this._pathBD = "jdbc:sqlite:C:\\Users\\Daniel.LAPTOP-0APVLH0B\\Documents\\NetBeansProjects\\POOProject\\src\\Data";
+        //this._pathBD = "jdbc:sqlite:C:\\Users\\Daniel.LAPTOP-0APVLH0B\\Documents\\NetBeansProjects\\POOProject\\src\\Data";
+        File f = new File(".");
+        this._pathBD = "jdbc:sqlite:" + f.getAbsolutePath() + "\\src\\Data";
     }
     
     public Connection Connect(){
@@ -43,9 +46,67 @@ public class db_controller {
         }
     }
     
-    public ArrayList<ArrayList<String>> GetAllData(String table, ArrayList<String> columns){
+    public ArrayList<ArrayList<String>> GetData(String table, ArrayList<String> columns){
         StringBuilder sql = new StringBuilder("SELECT * FROM ");
         sql.append(table);
+        
+        ArrayList<String> cliente = new ArrayList<>();
+        ArrayList<ArrayList<String>> total = new ArrayList<>();
+        
+        try(Connection conn = Connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql.toString())){
+            
+            while (rs.next()) {
+                for(String col : columns){
+                    cliente.add(rs.getString(col));
+                }
+                total.add((ArrayList<String>) cliente.clone());
+                cliente.clear();
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return total;
+    }
+    
+    public ArrayList<ArrayList<String>> GetData(String table, String key, String pass, ArrayList<String> columns){
+        StringBuilder sql = new StringBuilder("SELECT * FROM ");
+        sql.append(table);
+        sql.append(" WHERE ");
+        sql.append(key);
+        sql.append(" = ");
+        sql.append(pass);
+        
+        
+        ArrayList<String> cliente = new ArrayList<>();
+        ArrayList<ArrayList<String>> total = new ArrayList<>();
+        
+        try(Connection conn = Connect();
+            Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql.toString())){
+            
+            while (rs.next()) {
+                for(String col : columns){
+                    cliente.add(rs.getString(col));
+                }
+                total.add((ArrayList<String>) cliente.clone());
+                cliente.clear();
+            }
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return total;
+    }
+    
+    public ArrayList<ArrayList<String>> GetData(String table, String key, int pass, ArrayList<String> columns){
+        StringBuilder sql = new StringBuilder("SELECT * FROM ");
+        sql.append(table);
+        sql.append(" WHERE ");
+        sql.append(key);
+        sql.append(" = ");
+        sql.append(pass);
+        
         
         ArrayList<String> cliente = new ArrayList<>();
         ArrayList<ArrayList<String>> total = new ArrayList<>();
