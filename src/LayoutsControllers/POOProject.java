@@ -1,17 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LayoutsControllers;
-import Data.Controllers.ClientController;
-import Data.Controllers.ProjectController;
-import Data.db_connection.db_controller;
-import Layouts.ComprarProduto;
-import Layouts.MenuUI;
-import Models.PCPModel;
-import Package.Helper;
-import java.util.ArrayList;
+import Models.PCPModel; 
 /**
  *
  * @author Daniel
@@ -25,7 +13,19 @@ public class POOProject {
         //se tiver me printa um okay e diz que aquela porra ta ocupada
         PCPModel model = new PCPModel();
         
-        model.GetFreeProjects();
+        //função que starta o pcp baseado em um id de pedido e sua quantidade requerida
+        //checa se tem projeto daquela quantidade
+        model.SetFreeProjects(5, 10);
+        model.SetFreeProjects(5, 100);
+        model.SetFreeProjects(5, 100);
+        model.SetFreeProjects(5, 100);
+        model.SetFreeProjects(5, 100);
+        model.SetFreeProjects(5, 100);
+        model.SetFreeProjects(5, 10);
+        model.SetFreeProjects(5, 10);
+        model.SetFreeProjects(5, 10);
+        model.SetFreeProjects(5, 10);
+        model.SetFreeProjects(5, 10);
     }
     
 }

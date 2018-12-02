@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Data.Controllers;
 
 import Data.IControllers.IController;
@@ -17,9 +12,11 @@ import java.util.ArrayList;
 public class Controller implements IController{
     protected db_controller controller;    
     protected ArrayList<String> columns;
+    protected ArrayList<String> columnsInsert;
     protected String table;
     protected Helper hlp;
     protected ArrayList<ArrayList<String>> ret;
+    protected String idKey;
 
     @Override
     public void InsertData(String table, String columns, String values) {
@@ -40,6 +37,26 @@ public class Controller implements IController{
     public void GetData(String table, String key, int pass, ArrayList<String> columns) {
         this.ret = controller.GetData(table, key, pass, columns);
     }
+    
+    @Override
+    public void UpdateData(String table, String sets, String idKey, String id){
+        controller.UpdateData(table, sets, idKey, id);
+    }
+    
+    @Override
+    public void DeleteData(String table, String idKey, String id){
+        controller.DeleteData(table, idKey, id);
+    }
+    
+    @Override
+    public void UpdateData(String table, String sets, String idKey, int id){
+        controller.UpdateData(table, sets, idKey, id);
+    }
+    
+    @Override
+    public void DeleteData(String table, String idKey, int id){
+        controller.DeleteData(table, idKey, id);
+    }
 
     @Override
     public String GetTable() {
@@ -56,5 +73,13 @@ public class Controller implements IController{
         return this.ret;
     }
     
+    @Override
+    public String GetIdKey(){
+        return this.idKey;
+    }
     
+    @Override
+    public ArrayList<String> GetInsertColumns(){
+        return this.columnsInsert;
+    }
 }
