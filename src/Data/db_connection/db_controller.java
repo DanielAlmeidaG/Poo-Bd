@@ -128,14 +128,64 @@ public class db_controller {
         return total;
     }
     
-    public void UpdateData(String table, String sets, int id){
+    public void UpdateData(String table, String sets, String idKey, String id){
         StringBuilder sql = new StringBuilder("UPDATE ");
         sql.append(table);
         sql.append(" SET ");
         sql.append(sets);
-        sql.append(" WHERE id = ");
+        sql.append(" WHERE ");
+        sql.append(idKey);
+        sql.append(" = ");
         sql.append(id);
- 
+        
+        try (Connection conn = Connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void UpdateData(String table, String sets, String idKey, int id){
+        StringBuilder sql = new StringBuilder("UPDATE ");
+        sql.append(table);
+        sql.append(" SET ");
+        sql.append(sets);
+        sql.append(" WHERE ");
+        sql.append(idKey);
+        sql.append(" = ");
+        sql.append(id);
+        
+        try (Connection conn = Connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void DeleteData(String table, String idKey, String id){
+        StringBuilder sql = new StringBuilder("DELETE FROM ");
+        sql.append(table);
+        sql.append(" WHERE ");
+        sql.append(idKey);
+        sql.append(" = ");
+        sql.append(id);
+        
+        try (Connection conn = Connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void DeleteData(String table, String idKey, int id){
+        StringBuilder sql = new StringBuilder("DELETE FROM ");
+        sql.append(table);
+        sql.append(" WHERE ");
+        sql.append(idKey);
+        sql.append(" = ");
+        sql.append(id);
+        
         try (Connection conn = Connect();
             PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
             pstmt.executeUpdate();

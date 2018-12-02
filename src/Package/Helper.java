@@ -30,11 +30,55 @@ public class Helper {
         ArrayList<String> temp = new ArrayList<>();
         if(!columns.isEmpty() && !columns.isEmpty()){            
             for(int x=0; x<columns.size(); x++){
-                temp.add(columns.get(x).concat(" = ").concat("'").concat(values.get(x).concat("'")));
-                
+                temp.add(columns.get(x).toString().concat(" = '").concat(values.get(x).toString()).concat("' "));                
             }            
             return SerializeColToString(temp);
         }
         return null;
     }
+    public String SerializeSetsToString(ArrayList<String> columns, ArrayList<String> values, boolean quote){
+        if(!quote){
+            ArrayList<String> temp = new ArrayList<>();
+        if(!columns.isEmpty() && !columns.isEmpty()){            
+            for(int x=0; x<columns.size(); x++){
+                temp.add(columns.get(x).toString().concat(" = ").concat(values.get(x).toString()));                
+            }            
+            return SerializeColToString(temp);
+        }
+        return null;
+        }
+        else{
+            ArrayList<String> temp = new ArrayList<>();
+            if(!columns.isEmpty() && !columns.isEmpty()){            
+                for(int x=0; x<columns.size(); x++){
+                    temp.add(columns.get(x).toString().concat(" = '").concat(values.get(x).toString()).concat("' "));                
+                }            
+                return SerializeColToString(temp);
+            }
+            return null;
+        }
+    }
+    public String SerializeSetsToString(boolean quote, ArrayList<String> columns, ArrayList<Object> values){
+        if(!quote){
+            ArrayList<String> temp = new ArrayList<>();
+        if(!columns.isEmpty() && !columns.isEmpty()){            
+            for(int x=0; x<columns.size(); x++){
+                temp.add(columns.get(x).toString().concat(" = ").concat(values.get(x).toString()));                
+            }            
+            return SerializeColToString(temp);
+        }
+        return null;
+        }
+        else{
+            ArrayList<String> temp = new ArrayList<>();
+            if(!columns.isEmpty() && !columns.isEmpty()){            
+                for(int x=0; x<columns.size(); x++){
+                    temp.add(columns.get(x).toString().concat(" = '").concat(values.get(x).toString()).concat("' "));                
+                }            
+                return SerializeColToString(temp);
+            }
+            return null;
+        }
+    }
+    
 }
